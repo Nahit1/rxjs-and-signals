@@ -1,0 +1,42 @@
+<div
+  class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <a href="#">
+    <img
+      class="rounded-t-lg"
+      src="{{ 'http://image.tmdb.org/t/p/w400' + movie.poster_path }}"
+      alt=""
+    />
+  </a>
+  <div class="px-5 py-2">
+    <a href="#">
+      <h5
+        class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        {{
+          movie.title.length > 21
+            ? movie.title.slice(0, 18) + "..."
+            : movie.title
+        }}
+      </h5>
+    </a>
+    <p class="mb-2 font-normal text-sm text-gray-700 dark:text-gray-400">
+      {{
+        movie.overview.length > 100
+          ? movie.overview.slice(0, 97) + "..."
+          : movie.overview
+      }}
+    </p>
+    <div class="flex items-center justify-between">
+      <p class="font-light text-gray-700 dark:text-gray-400">
+        {{ movie.release_date }}
+      </p>
+      <button
+        type="button"
+        class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800"
+      >
+        Details
+      </button>
+    </div>
+  </div>
+</div>
