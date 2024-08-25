@@ -1,22 +1,23 @@
 <div class="grid xl:grid-cols-5 lg:grid-cols-4 gap-3 mt-20 my-5">
-  <ng-container *ngIf="movies$ | async as movies">
-    <ng-container *ngIf="movies.results.length > 0">
-      <app-movie
-        *ngFor="let movie of movies.results"
-        [movie]="movie"
-      ></app-movie>
-    </ng-container>
+  <ng-container *ngIf="movies().results && movies().results.length > 0">
+    <app-movie
+      *ngFor="let movie of movies().results"
+      [movie]="movie"
+    ></app-movie>
   </ng-container>
 </div>
 
-<div class="flex justify-center">
+<div
+  class="flex justify-center"
+  *ngIf="movies().results && movies().results.length > 0"
+>
   <button
     (click)="loadMore()"
     type="button"
     class="text-white bg-blue-700 w-2/12 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
   >
     <svg
-      *ngIf="movieService.loading$ | async"
+      *ngIf="movieService.loading()"
       aria-hidden="true"
       role="status"
       class="inline w-4 h-4 me-3 text-white animate-spin"

@@ -2,6 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MovieComponent } from './movie/movie.component';
 import { MoviesService } from '../services/movies.service';
 import { CommonModule } from '@angular/common';
+import { CustomModel } from '../models/custom.model';
+import { Movie } from '../models/movie.model';
+
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-movies',
@@ -12,13 +16,13 @@ import { CommonModule } from '@angular/common';
 })
 export class MoviesComponent implements OnInit {
   movieService = inject(MoviesService);
-  movies$ = this.movieService.movies$;
+  movies = toSignal(this.movieService.movies$, {
+    initialValue: {} as CustomModel<Movie[]>,
+  });
 
-  ngOnInit(): void {
-    //this.movieService.getMovies().subscribe((x) => console.log(x));
-  }
+  ngOnInit(): void {}
 
   loadMore() {
-    this.movieService.page$.next(this.movieService.page$.getValue() + 1);
+    this.movieService.page.update((val) => val + 1);
   }
 }
